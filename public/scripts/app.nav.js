@@ -6,6 +6,7 @@
             link: function (scope, ele) {
                 var app = $("#app");
                 ele.on("click", function (e) {
+                    console.log('directive toggleNavCollapsedMin...');
                     if (app.hasClass("nav-collapsed-min"))
                         app.removeClass("nav-collapsed-min");
                     else {
@@ -15,22 +16,28 @@
                     }
                 })
             }}
-    }]).directive("collapseNav", [function () {
+    }]).directive("collapseNav", [function () {//collapse-nav
         return{
             restrict: "A",
             link: function (scope, ele) {
                 var $a, $aRest, $app, $lists, $listsRest, $nav, $window, Timer, prevWidth, updateClass;
                 $window = $(window);
                 $lists = ele.find("ul").parent("li");
+                console.log($lists)
                 $lists.append('<i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>');
                 $a = $lists.children("a");
                 $listsRest = ele.children("li").not($lists), $aRest = $listsRest.children("a");
                 $app = $("#app");
                 $nav = $("#nav-container");
                 $a.on("click", function (event) {
+                    console.log('directive $a collapseNav...');
                     if ($app.hasClass("nav-collapsed-min") || $nav.hasClass("nav-horizontal") && $window.width() >= 768) {
                     } else {
                         var $this = $(this), $parent = $this.parent("li");
+                        console.log('$this');
+                        console.log($this);
+                        console.log('$parent');
+                        console.log($parent);
                         $lists.not($parent).removeClass("open").find("ul").slideUp();
                         $parent.toggleClass("open").find("ul").slideToggle();
                     }
@@ -40,6 +47,7 @@
                     // $parent.toggleClass("open").find("ul").slideToggle(), event.preventDefault())
                 });
                 $aRest.on("click", function () {
+                    console.log('directive $aRest toggleNavCollapsedMin...');
                     return $lists.removeClass("open").find("ul").slideUp()
                 });
                 scope.$on("nav:reset", function () {
@@ -54,7 +62,7 @@
                     return clearTimeout(t), t = setTimeout(updateClass, 300)
                 });
             }}
-    }]).directive("highlightActive", [function () {
+    }]).directive("highlightActive", [function () { //highlight-active
         return{restrict: "A", controller: ["$scope", "$element", "$attrs", "$location", function ($scope, $element, $attrs, $location) {
             var highlightActive, links, path;
             return links = $element.find("a"), path = function () {
@@ -68,9 +76,10 @@
                 return newVal !== oldVal ? highlightActive(links, $location.path()) : void 0
             })
         }]}
-    }]).directive("toggleOffCanvas", [function () {
+    }]).directive("toggleOffCanvas", [function () {//toggle-off-canvas
         return{restrict: "A", link: function (scope, ele) {
             return ele.on("click", function () {
+                console.log('directive toggleOffCanvas...');
                 return $("#app").toggleClass("on-canvas")
             })
         }}

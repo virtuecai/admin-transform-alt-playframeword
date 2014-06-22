@@ -7,7 +7,7 @@
         "easypiechart",
         "mgo-angular-wizard",
         "textAngular",
-        "ui.tree",
+        //"ui.tree",
         "ngMap",
         "ngTagsInput",
         "angular-intro",
